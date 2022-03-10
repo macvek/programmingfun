@@ -2,34 +2,54 @@
 <html>
 
 <body>
+    <style>
+        #chessboard td {
+            border: 1px solid black;
+        }
+
+    </style>
+
     <h1>HEADER</h1>
     <span>some text</span>
-    <table style="border:1px solid black">
-        <tr>
-            <td>one</td>
-            <td>snd</td>
-        </tr>
-    </table>
 
     <button onclick="sampleAction(1,' 2 ',3)">
         Sample
     </button>
 
+
+    <table id="chessboard">
+    </table>
+
     <script>
         window.addEventListener('load', start);
+
+        function addRow(rowName) {
+            let row = document.createElement("tr");
+            for (let i=0;i<8;i++) {
+                let newCell = addCell(rowName+(i+1));
+                row.appendChild(newCell);
+            }
+
+            let chessboard = document.getElementById('chessboard');
+            chessboard.appendChild(row);
+        }
+
+        function addCell(name) {
+            let cell = document.createElement("td");
+            cell.innerText = name;
+
+            return cell;
+        }
+
 
         function sampleAction(a, b, c) {
             console.log("HELLO", [a, b, c]);
         }
 
         function start() {
-            console.log('onload');
-            let variable = "ASD";
-
-            setInterval(periodic, 1000);
-
-            function periodic() {
-                console.log("xxx");
+            let letters = ['a','b','c','d','e','f','g'];
+            for (let each of letters) {
+                addRow(each); 
             }
         }
 
